@@ -24,21 +24,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class TipoProductoAddController {
 
     private ValidarTipoProducto validarTipoProducto;
-    private JdbcTemplate jdbcTemplateUser;
     private JdbcTemplate jdbcTemplate;
 
     public TipoProductoAddController() {
         Conexion conn = new Conexion();
         this.validarTipoProducto = new ValidarTipoProducto();
-        this.jdbcTemplateUser = new JdbcTemplate(conn.conectar());
         this.jdbcTemplate = new JdbcTemplate(conn.conectar());
     }
 
-    //@ModelAttribute("TipoLinea") TipoLinea p, BindingResult result, SessionStatus status
-    //this.validarTipoProducto.validate(p, result);
+    
     
     @ModelAttribute("id_tipo_linea")
-    public Map<String, String> ListCond() {
+    public Map<String, String> cmbTipoLinea() {
         Map<String, String> ListCond = new LinkedHashMap<>();
         String SQL = "SELECT id,tipo_linea FROM tipo_linea;";
         List<Map<String, Object>> l;
@@ -71,7 +68,7 @@ public class TipoProductoAddController {
             mav.addObject("Producto", u);
             return mav;
         } else {
-            this.jdbcTemplateUser.update("insert into tipo_producto (tipo_producto, id_tipo_linea) values (?, ?)", u.getNombre(), Integer.parseInt(u.getId_tipo_linea()));
+            this.jdbcTemplate.update("insert into tipo_producto (tipo_producto, id_tipo_linea) values (?, ?)", u.getNombre(), Integer.parseInt(u.getId_tipo_linea()));
             return new ModelAndView("redirect:/TipoProductoHome.htm");
         }
     }

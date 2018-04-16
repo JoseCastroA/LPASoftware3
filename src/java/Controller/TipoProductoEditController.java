@@ -6,9 +6,7 @@
 package Controller;
 
 import Models.Conexion;
-import Models.TipoLinea;
 import Models.TipoProducto;
-import Models.ValidarTipoLinea;
 import Models.ValidarTipoProducto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,11 +32,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TipoProductoEditController {
 
-    private ValidarTipoProducto validar;
+    private ValidarTipoProducto validarTipoProducto;
     private JdbcTemplate jdbcTemplate;
 
     public TipoProductoEditController() {
-        this.validar = new ValidarTipoProducto();
+        this.validarTipoProducto = new ValidarTipoProducto();
         Conexion conn = new Conexion();
         this.jdbcTemplate = new JdbcTemplate(conn.conectar());
     }
@@ -48,12 +46,12 @@ public class TipoProductoEditController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("BD/TipoProductoEdit");
         int id = Integer.parseInt(request.getParameter("id"));
-        TipoProducto u = this.selectProducto(id);
+        TipoProducto u = this.seleccionarProducto(id);
         mav.addObject("Producto", new TipoProducto(id, u.getNombre(), u.getId_tipo_linea()));
         return mav;
     }
     @ModelAttribute("id_tipo_linea")
-    public Map<String, String> ListCond() {
+    public Map<String, String> cmbTipoLinea() {
         Map<String, String> ListCond = new LinkedHashMap<>();
         String SQL = "SELECT id,tipo_linea FROM tipo_linea;";
         List<Map<String, Object>> l;
@@ -68,11 +66,11 @@ public class TipoProductoEditController {
     }
     @RequestMapping(value = "TipoProductoEdit.htm", method = RequestMethod.POST)
     public ModelAndView edit(@ModelAttribute("Producto") TipoProducto u, BindingResult result, SessionStatus status, HttpServletRequest request){
-        this.validar.validate(u, result);
+        this.validarTipoProducto.validate(u, result);
         if(result.hasErrors()){
             ModelAndView mav=new ModelAndView();
             int id= Integer.parseInt(request.getParameter("id"));
-            TipoProducto datos = this.selectProducto(id);
+            TipoProducto datos = this.seleccionarProducto(id);
             mav.setViewName("BD/TipoProductoEdit");
             mav.addObject("Producto",u);
             return mav;
@@ -83,7 +81,7 @@ public class TipoProductoEditController {
         }
     }
 
-    public TipoProducto selectProducto(int id) {
+    public TipoProducto seleccionarProducto(int id) {
         final TipoProducto u = new TipoProducto();
         String query = "select * from tipo_producto where id='" + id + "';";
         return (TipoProducto) jdbcTemplate.query(query, new ResultSetExtractor<TipoProducto>() {

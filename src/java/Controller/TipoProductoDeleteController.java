@@ -16,17 +16,17 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class TipoProductoDeleteController {
-    private JdbcTemplate jdbc;
+    private JdbcTemplate jdbcTemplate;
 
     public TipoProductoDeleteController() {
         Conexion conn = new Conexion();
-        this.jdbc = new JdbcTemplate(conn.conectar());
+        this.jdbcTemplate = new JdbcTemplate(conn.conectar());
     }
 
     @RequestMapping("TipoProductoDelete.htm")
     public ModelAndView delete(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        this.jdbc.update("delete from tipo_producto where id=?", id);
+        this.jdbcTemplate.update("delete from tipo_producto where id=?", id);
         return new ModelAndView("redirect:/TipoProductoHome.htm");
     }
 }
