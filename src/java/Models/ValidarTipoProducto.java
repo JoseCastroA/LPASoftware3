@@ -21,6 +21,6 @@ public class ValidarTipoProducto implements Validator{
     @Override
     public void validate(Object o, Errors errors) {
         TipoProducto persona = (TipoProducto) o;
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Nombre", "required.Nombre", "Todos los campos son obligatorios obligatorios");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Nombre", "required.Nombre", "Todos los campos son obligatorios");
       }
 }

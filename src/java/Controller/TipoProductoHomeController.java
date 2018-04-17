@@ -18,34 +18,24 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TipoProductoHomeController {
      //PARA BD
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate conexion;
     
     public TipoProductoHomeController() {
         
         Conexion conn = new Conexion();
-        this.jdbcTemplate = new JdbcTemplate(conn.conectar());
+        this.conexion = new JdbcTemplate(conn.conectar());
     }
 
-    //-------------Base de Datos------------------- 
-    
     @RequestMapping("TipoProductoHome.htm")
     public ModelAndView homeBD(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("BD/TipoProductoHome");
         String sql = "select pro.id, pro.tipo_producto, lin.tipo_linea from tipo_producto pro, tipo_linea lin where lin.id=pro.id_tipo_linea;";
         List response;
-        response = this.jdbcTemplate.queryForList(sql);
+        response = this.conexion.queryForList(sql);
         System.out.println(response);
         mav.addObject("Datos", response);
         return mav;
     } 
-    
-    //------------------CRUD-----------------------
-    
-    @RequestMapping("TipoProductoAdd.htm")
-    public ModelAndView add(){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("BD/TipoProductoAdd");
-        return mav;
-    }
+
 }

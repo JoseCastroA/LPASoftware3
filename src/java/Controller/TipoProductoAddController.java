@@ -1,10 +1,7 @@
 package Controller;
 
 import Models.Conexion;
-import Models.TipoLinea;
-import Models.ValidarTipoLinea;
 import Models.*;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,12 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class TipoProductoAddController {
 
     private ValidarTipoProducto validarTipoProducto;
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate conexion;
 
     public TipoProductoAddController() {
         Conexion conn = new Conexion();
         this.validarTipoProducto = new ValidarTipoProducto();
-        this.jdbcTemplate = new JdbcTemplate(conn.conectar());
+        this.conexion = new JdbcTemplate(conn.conectar());
     }
 
     
@@ -37,38 +34,28 @@ public class TipoProductoAddController {
     @ModelAttribute("id_tipo_linea")
     public Map<String, String> cmbTipoLinea() {
         Map<String, String> ListCond = new LinkedHashMap<>();
-        String SQL = "SELECT id,tipo_linea FROM tipo_linea;";
-        List<Map<String, Object>> l;
-        l = this.jdbcTemplate.queryForList(SQL);
+        String sql = "SELECT id,tipo_linea FROM tipo_linea;";
+        List<Map<String, Object>> listaTipoLinea;
+        listaTipoLinea = this.conexion.queryForList(sql);
 
-        if ((l != null) && (l.size() > 0)) {
-            for (Map<String, Object> tempRow : l) {
+        if ((listaTipoLinea != null) && (listaTipoLinea.size() > 0)) {
+            for (Map<String, Object> tempRow : listaTipoLinea) {
                 ListCond.put( ""+tempRow.get("id"), ""+tempRow.get("tipo_linea"));
             }
         }
         return ListCond;
     }
-    @RequestMapping(value = "TipoProductoAdd.htm", method = RequestMethod.GET)
-    public ModelAndView add() {
-
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("BD/TipoProductoAdd");
-        mav.addObject("Producto", new TipoProducto());
-        return mav;
-    }
 
     @RequestMapping(value = "TipoProductoAdd.htm", method = RequestMethod.POST)
-    public ModelAndView add(@ModelAttribute("Producto") TipoProducto u, BindingResult result, SessionStatus status) {
-        this.validarTipoProducto.validate(u, result);
-        //System.out.println(u.getNombre());
-        //mav.setViewName("BD/add");
+    public ModelAndView add(@ModelAttribute("Producto") TipoProducto tipoProducto, BindingResult result, SessionStatus status) {
+        this.validarTipoProducto.validate(tipoProducto, result);
         if (result.hasErrors()) {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("BD/TipoProductoAdd");
-            mav.addObject("Producto", u);
+            mav.addObject("Producto", tipoProducto);
             return mav;
         } else {
-            this.jdbcTemplate.update("insert into tipo_producto (tipo_producto, id_tipo_linea) values (?, ?)", u.getNombre(), Integer.parseInt(u.getId_tipo_linea()));
+            this.conexion.update("insert into tipo_producto (tipo_producto, id_tipo_linea) values (?, ?)", tipoProducto.getNombre(), Integer.parseInt(tipoProducto.getId_tipo_linea()));
             return new ModelAndView("redirect:/TipoProductoHome.htm");
         }
     }
