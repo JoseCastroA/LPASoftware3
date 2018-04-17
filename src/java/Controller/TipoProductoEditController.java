@@ -35,12 +35,19 @@ public class TipoProductoEditController {
     private ValidarTipoProducto validarTipoProducto;
     private JdbcTemplate conexion;
 
+    /**
+     * Constructor
+     */
     public TipoProductoEditController() {
         this.validarTipoProducto = new ValidarTipoProducto();
         Conexion conn = new Conexion();
         this.conexion = new JdbcTemplate(conn.conectar());
     }
 
+    /**
+     * Obtiene los id y nombres de los tipos de línea que están en la base de datos
+     * @return Retorna la lista de los tipos de línea
+     */
     @ModelAttribute("id_tipo_linea")
     public Map<String, String> cmbTipoLinea() {
         Map<String, String> ListCond = new LinkedHashMap<>();
@@ -55,6 +62,15 @@ public class TipoProductoEditController {
         }
         return ListCond;
     }
+    
+    /**
+     * Edita un producto en la base de datos con los datos nuevos a partir de su id
+     * @param tipoProducto Tipo de producto a modificar
+     * @param result Resultado al validar la petición
+     * @param status Estado de la petición
+     * @param request Request desde el jsp para la petición 
+     * @return La vista a la que se redirige después de la edición
+     */
     @RequestMapping(value = "TipoProductoEdit.htm", method = RequestMethod.POST)
     public ModelAndView edit(@ModelAttribute("Producto") TipoProducto tipoProducto, BindingResult result, SessionStatus status, HttpServletRequest request){
         this.validarTipoProducto.validate(tipoProducto, result);
@@ -70,6 +86,11 @@ public class TipoProductoEditController {
         }
     }
 
+    /**
+     * Busca un tipo de producto a partir de id
+     * @param id Id del tipo de producto a buscar
+     * @return Retorna el tipo de producto buscado
+     */
     public TipoProducto seleccionarProducto(int id) {
         final TipoProducto tipoProducto = new TipoProducto();
         String query = "select * from tipo_producto where id='" + id + "';";

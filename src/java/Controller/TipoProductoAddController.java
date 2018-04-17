@@ -23,6 +23,9 @@ public class TipoProductoAddController {
     private ValidarTipoProducto validarTipoProducto;
     private JdbcTemplate conexion;
 
+    /**
+     * Constructor
+     */
     public TipoProductoAddController() {
         Conexion conn = new Conexion();
         this.validarTipoProducto = new ValidarTipoProducto();
@@ -30,7 +33,10 @@ public class TipoProductoAddController {
     }
 
     
-    
+    /**
+     * Obtiene los id y nombres de los tipos de línea que están en la base de datos
+     * @return Retorna la lista de los tipos de línea
+     */
     @ModelAttribute("id_tipo_linea")
     public Map<String, String> cmbTipoLinea() {
         Map<String, String> ListCond = new LinkedHashMap<>();
@@ -46,6 +52,13 @@ public class TipoProductoAddController {
         return ListCond;
     }
 
+    /**
+     * Adiciona un nuevo tipo de producto a la base de datos generando un id consecutivo
+     * @param tipoProducto Tipo de producto a adicionar
+     * @param result Resultado de la validación antes de hacer la inserción
+     * @param status Estado de la solicitud desde el jsp
+     * @return Retorna la vista a la que se redirige después de la petición de adicionar
+     */
     @RequestMapping(value = "TipoProductoAdd.htm", method = RequestMethod.POST)
     public ModelAndView add(@ModelAttribute("Producto") TipoProducto tipoProducto, BindingResult result, SessionStatus status) {
         this.validarTipoProducto.validate(tipoProducto, result);

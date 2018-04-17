@@ -18,9 +18,14 @@ public class ValidarTipoProducto implements Validator{
         return TipoProducto.class.isAssignableFrom(type);
     }
 
+    /**
+     * Verifica que los campos no estén vacíos
+     * @param tipoProducto Tipo de producto
+     * @param errors Tipos de errores
+     */
     @Override
-    public void validate(Object o, Errors errors) {
-        TipoProducto persona = (TipoProducto) o;
+    public void validate(Object tipoProducto, Errors errors) {
+        TipoProducto persona = (TipoProducto) tipoProducto;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Nombre", "required.Nombre", "Todos los campos son obligatorios");
       }
 }

@@ -17,15 +17,20 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class TipoProductoHomeController {
-     //PARA BD
     private JdbcTemplate conexion;
     
+    /**
+     * Constructor
+     */
     public TipoProductoHomeController() {
-        
         Conexion conn = new Conexion();
         this.conexion = new JdbcTemplate(conn.conectar());
     }
 
+    /**
+     * Obtiene los datos que están al momento de ingresar la base de datos
+     * @return Retorna la vista con los datos al tipoLineaHomeController
+     */
     @RequestMapping("TipoProductoHome.htm")
     public ModelAndView homeBD(){
         ModelAndView mav = new ModelAndView();

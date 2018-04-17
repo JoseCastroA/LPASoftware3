@@ -19,7 +19,7 @@ public class TipoProductoDeleteController {
     private JdbcTemplate conexion;
     
     /**
-     * 
+     * Constructor
      */
     public TipoProductoDeleteController() {
         Conexion conn = new Conexion();
@@ -27,9 +27,9 @@ public class TipoProductoDeleteController {
     }
     
     /**
-     * 
-     * @param request
-     * @return 
+     * Elimina un tipo de producto en la base de datos a partir de su id
+     * @param request Request de su petición desde el jsp
+     * @return Retorna la vista a la que se redirige después de la petición de eliminar
      */
     @RequestMapping("TipoProductoDelete.htm")
     public ModelAndView delete(HttpServletRequest request) {

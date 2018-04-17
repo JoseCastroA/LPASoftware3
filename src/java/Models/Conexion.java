@@ -14,6 +14,10 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 public class Conexion {
     
+    /**
+     * Genera la conexión con la base de datos
+     * @return Retorna los datos relacionados con la conexión
+     */
     public DriverManagerDataSource conectar(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");

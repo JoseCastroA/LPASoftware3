@@ -14,15 +14,29 @@ public class TipoProducto {
     private String Nombre;
     private String Id_tipo_linea;
     
+    /**
+     * Constructor
+     */
     public TipoProducto() {
     }
 
+    /**
+     * Constructor
+     * @param Id Id del tipo de producto
+     * @param Nombre Nombre del tipo de producto
+     * @param Id_tipo_linea Id de la línea del producto
+     */
     public TipoProducto(int Id, String Nombre, String Id_tipo_linea) {
         this.Id = Id;
         this.Nombre = Nombre;
         this.Id_tipo_linea = Id_tipo_linea;
     }
     
+    /**
+     * 
+     * @param Nombre Nombre del tipo de producto
+     * @param Id_tipo_linea Id de la línea del producto
+     */
     public TipoProducto(String Nombre, String Id_tipo_linea) {
         this.Nombre = Nombre;
         this.Id_tipo_linea = Id_tipo_linea;
