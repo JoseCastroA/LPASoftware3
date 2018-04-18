@@ -21,7 +21,7 @@ public class Conexion {
     public DriverManagerDataSource conectar(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/Proyecto");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/Proyecto2");
         dataSource.setUsername("postgres");
         dataSource.setPassword("MunicipalWaste");
         return dataSource;

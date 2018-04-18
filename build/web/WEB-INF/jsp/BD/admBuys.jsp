@@ -65,7 +65,9 @@
                             </tbody>
 
                         </table>
-                        <a href="COMPRA_liquidar.htm"  style="right: -88%;position:  relative;" class="btn btn-success">Añadir otro producto</a> 
+                        <c:forEach items="${num}" var="nume">
+                 <a href="COMPRA_liquidar.htm?id=${nume.n}"  style="right: -88%;position:  relative;" class="btn btn-success">Liquidar</a> 
+                        </c:forEach>
 
                     </div>
                 </div>

@@ -61,13 +61,5 @@ public class AddBuyController {
           return new ModelAndView("redirect:/admBuys.htm");
           }
     }
-    
-        @RequestMapping(value = "/COMPRA_liquidar.htm",method = {RequestMethod.POST, RequestMethod.GET})
-        public  ModelAndView liquidarCompra() {
-         Producto compra = new Producto();
-         compra.liquidarCompra();
-          
-          return new ModelAndView("redirect:/addBuy.htm?id=1");
-    }
-    
+
 }

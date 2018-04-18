@@ -53,6 +53,15 @@ public class TipoProductoAddController {
         }
         return ListCond;
     }
+    
+    @RequestMapping(value = "TipoProductoAdd.htm", method = RequestMethod.GET)
+    public ModelAndView add() {
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("BD/TipoProductoAdd");
+        mav.addObject("Producto", new TipoProducto());
+        return mav;
+    }
 
     /**
      * Adiciona un nuevo tipo de producto a la base de datos generando un id

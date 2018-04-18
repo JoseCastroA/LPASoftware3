@@ -34,6 +34,7 @@
                 <prop key="addNovedades.htm">addNewsController</prop>
                 <prop key="editNovedades.htm">editNewsController</prop>
                 <prop key="previewNovedades.htm">previewNewsController</prop>
+                <prop key="afterBuy.htm">AfterBuyController</prop>
             </props>
         </property>
     </bean>
@@ -65,7 +66,7 @@
     <bean name="editNewsController" class="Controller.editNewsController" /> 
     <bean name="previewNewsController" class="Controller.previewNewsController" />
     <bean name="deleteNewsController" class="Controller.deleteNewsController"/>
-    
+    <bean name="AfterBuyController" class="Controller.AfterBuyController" />
     <bean name="homeController" class="Controller.HomeController" />
     <bean name="addController" class="Controller.addController" />
     <bean name="editController" class="Controller.editController" /> 

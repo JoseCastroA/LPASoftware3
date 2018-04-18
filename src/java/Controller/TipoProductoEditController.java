@@ -64,6 +64,16 @@ public class TipoProductoEditController {
         }
         return ListCond;
     }
+    
+    @RequestMapping(value = "TipoProductoEdit.htm", method = RequestMethod.GET)
+    public ModelAndView edit(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("BD/TipoProductoEdit");
+        int id = Integer.parseInt(request.getParameter("id"));
+        TipoProducto u = this.seleccionarProducto(id);
+        mav.addObject("Producto", new TipoProducto(id, u.getNombre(), u.getId_tipo_linea()));
+        return mav;
+    }
 
     /**
      * Edita un producto en la base de datos con los datos nuevos a partir de su

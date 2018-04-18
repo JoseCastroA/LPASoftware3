@@ -128,9 +128,16 @@ public class Producto {
           this.jdbcTemplateUser.update("delete from compra_temporal where id=?",Id);
     }
      
-    public void liquidarCompra()
+    
+    public void liquidarCompra2()
     {
-        this.jdbcTemplateUser.update("insert into trampa values (1);");
-        
+        this.jdbcTemplateUser.update("delete from compra_temporal");        
+    
     }
+    
+    public void actualizarNumero(int id) {
+        this.jdbcTemplateUser.update("update trampa set aux=? where aux = 9999",id);        
+    }
+    
+    
 }
