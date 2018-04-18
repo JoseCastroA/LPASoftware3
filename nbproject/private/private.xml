@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/trisb/OneDrive/Documentos/NetBeansProjects/LPASoftware3/src/java/Controller/TipoProductoDeleteController.java</file>
-            <file>file:/C:/Users/trisb/OneDrive/Documentos/NetBeansProjects/LPASoftware3/src/java/Controller/TipoProductoEditController.java</file>
-            <file>file:/C:/Users/trisb/OneDrive/Documentos/NetBeansProjects/LPASoftware3/src/java/Models/ValidarTipoProducto.java</file>
-            <file>file:/C:/Users/trisb/OneDrive/Documentos/NetBeansProjects/LPASoftware3/src/java/Controller/TipoProductoHomeController.java</file>
-            <file>file:/C:/Users/trisb/OneDrive/Documentos/NetBeansProjects/LPASoftware3/src/java/Controller/TipoProductoAddController.java</file>
-            <file>file:/C:/Users/trisb/OneDrive/Documentos/NetBeansProjects/LPASoftware3/src/java/Models/TipoProducto.java</file>
-            <file>file:/C:/Users/trisb/OneDrive/Documentos/NetBeansProjects/LPASoftware3/web/WEB-INF/jsp/BD/TipoProductoAdd.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
