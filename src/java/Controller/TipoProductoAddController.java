@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
  *
  * @author trisb
@@ -32,9 +33,10 @@ public class TipoProductoAddController {
         this.conexion = new JdbcTemplate(conn.conectar());
     }
 
-    
     /**
-     * Obtiene los id y nombres de los tipos de línea que están en la base de datos
+     * Obtiene los id y nombres de los tipos de línea que están en la base de
+     * datos
+     *
      * @return Retorna la lista de los tipos de línea
      */
     @ModelAttribute("id_tipo_linea")
@@ -46,18 +48,21 @@ public class TipoProductoAddController {
 
         if ((listaTipoLinea != null) && (listaTipoLinea.size() > 0)) {
             for (Map<String, Object> tempRow : listaTipoLinea) {
-                ListCond.put( ""+tempRow.get("id"), ""+tempRow.get("tipo_linea"));
+                ListCond.put("" + tempRow.get("id"), "" + tempRow.get("tipo_linea"));
             }
         }
         return ListCond;
     }
 
     /**
-     * Adiciona un nuevo tipo de producto a la base de datos generando un id consecutivo
+     * Adiciona un nuevo tipo de producto a la base de datos generando un id
+     * consecutivo
+     *
      * @param tipoProducto Tipo de producto a adicionar
      * @param result Resultado de la validación antes de hacer la inserción
      * @param status Estado de la solicitud desde el jsp
-     * @return Retorna la vista a la que se redirige después de la petición de adicionar
+     * @return Retorna la vista a la que se redirige después de la petición de
+     * adicionar
      */
     @RequestMapping(value = "TipoProductoAdd.htm", method = RequestMethod.POST)
     public ModelAndView add(@ModelAttribute("Producto") TipoProducto tipoProducto, BindingResult result, SessionStatus status) {

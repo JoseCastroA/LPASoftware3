@@ -45,7 +45,9 @@ public class TipoProductoEditController {
     }
 
     /**
-     * Obtiene los id y nombres de los tipos de línea que están en la base de datos
+     * Obtiene los id y nombres de los tipos de línea que están en la base de
+     * datos
+     *
      * @return Retorna la lista de los tipos de línea
      */
     @ModelAttribute("id_tipo_linea")
@@ -57,37 +59,40 @@ public class TipoProductoEditController {
 
         if ((listaTipoLinea != null) && (listaTipoLinea.size() > 0)) {
             for (Map<String, Object> tempRow : listaTipoLinea) {
-                ListCond.put( ""+tempRow.get("id"), ""+tempRow.get("tipo_linea"));
+                ListCond.put("" + tempRow.get("id"), "" + tempRow.get("tipo_linea"));
             }
         }
         return ListCond;
     }
-    
+
     /**
-     * Edita un producto en la base de datos con los datos nuevos a partir de su id
+     * Edita un producto en la base de datos con los datos nuevos a partir de su
+     * id
+     *
      * @param tipoProducto Tipo de producto a modificar
      * @param result Resultado al validar la petición
      * @param status Estado de la petición
-     * @param request Request desde el jsp para la petición 
+     * @param request Request desde el jsp para la petición
      * @return La vista a la que se redirige después de la edición
      */
     @RequestMapping(value = "TipoProductoEdit.htm", method = RequestMethod.POST)
-    public ModelAndView edit(@ModelAttribute("Producto") TipoProducto tipoProducto, BindingResult result, SessionStatus status, HttpServletRequest request){
+    public ModelAndView edit(@ModelAttribute("Producto") TipoProducto tipoProducto, BindingResult result, SessionStatus status, HttpServletRequest request) {
         this.validarTipoProducto.validate(tipoProducto, result);
-        if(result.hasErrors()){
-            ModelAndView mav=new ModelAndView();
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView();
             mav.setViewName("BD/TipoProductoEdit");
-            mav.addObject("Producto",tipoProducto);
+            mav.addObject("Producto", tipoProducto);
             return mav;
-        }else{
+        } else {
             int id = Integer.parseInt(request.getParameter("id"));
-            this.conexion.update("update tipo_producto set tipo_producto=?, id_tipo_linea=? where id=?;",tipoProducto.getNombre(), Integer.parseInt(tipoProducto.getId_tipo_linea()),id);
+            this.conexion.update("update tipo_producto set tipo_producto=?, id_tipo_linea=? where id=?;", tipoProducto.getNombre(), Integer.parseInt(tipoProducto.getId_tipo_linea()), id);
             return new ModelAndView("redirect:/TipoProductoHome.htm");
         }
     }
 
     /**
      * Busca un tipo de producto a partir de id
+     *
      * @param id Id del tipo de producto a buscar
      * @return Retorna el tipo de producto buscado
      */
@@ -106,4 +111,3 @@ public class TipoProductoEditController {
         });
     }
 }
-
